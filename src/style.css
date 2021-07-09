@@ -16,7 +16,10 @@ a:link {
 a:visited {
   color: rgb(226, 75, 168);
 }
-
+footer{
+    text-align: center;
+    margin: 5% auto;
+}
 .container {
   margin-top: 40px;
   max-width: 900px;
