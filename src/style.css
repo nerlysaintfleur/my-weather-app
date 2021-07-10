@@ -16,9 +16,12 @@ a:link {
 a:visited {
   color: rgb(226, 75, 168);
 }
-footer{
-    text-align: center;
-    margin: 5% auto;
+footer {
+  text-align: center;
+  margin: 2% auto;
+}
+.weather-wrapper {
+  animation: Slide_Up 1.2s ease-in-out;
 }
 .container {
   margin-top: 40px;
@@ -33,7 +36,6 @@ footer{
   -webkit-backdrop-filter: blur(0px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  animation: Slide_Up 1.2s ease-in-out;
 }
 .justify-content-md-center {
   margin: 0 auto;

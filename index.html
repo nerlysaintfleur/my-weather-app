@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="src/style.css" />
   </head>
   <body>
+    <div class="weather-wrapper">
     <div class="container">
       <ul class="nav nav-tabs">
         <li class="nav-item">
@@ -242,7 +243,7 @@
         <input
           class="form-control me-2 searchBar"
           type="search"
-          placeholder="Search"
+          placeholder="Enter a city name"
           aria-label="Search"
           id="search-city"
         />
@@ -254,9 +255,17 @@
           Search
         </button>
       </form>
+      </div>
+      <footer>
+      <p>
+        Coded by Nerly Saint-Fleur |
+        <a
+          href="https://github.com/nerlysaintfleur/my-weather-app"
+          target="_blank"
+          >Open-source code</a
+        >
+      </p>
     </div>
-    <footer>
-        <p>Coded by Nerly Saint-Fleur | <a href="https://github.com/nerlysaintfleur/my-weather-app" target="_blank">Open-source code</a></p>
     </footer>
     <script src="src/app.js"></script>
   </body>
