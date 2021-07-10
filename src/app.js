@@ -48,23 +48,8 @@ function searchCity(event) {
     } else {
         alert("Please enter a valid city!")
     }
-
 }
 function showTemp(response) {
-    console.log(response.data);
-    weather.tempValue = Math.round(response.data.main.temp);
-    weather.minTemp = Math.round(response.data.main.temp_min);
-    weather.maxTemp = Math.round(response.data.main.temp_max);
-
-    weather.cityName.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
-    weather.tempElement.innerHTML = `${weather.tempValue}`;
-    weather.feelLike.innerHTML = `Feels Like: ${Math.round(response.data.main.feels_like)}°`;
-    weather.humidity.innerHTML = `Humidity: ${response.data.main.humidity}%`;
-    weather.description.innerHTML = `Type: ${response.data.weather[0].description}`;
-    weather.minMaxTemp.innerHTML = `Hightest: ${weather.maxTemp}°  Lowest: ${weather.minTemp}°`;
-
-}
-function showCurrentTemp(response) {
     console.log(response.data);
     weather.tempValue = Math.round(response.data.main.temp);
     weather.minTemp = Math.round(response.data.main.temp_min);
@@ -82,7 +67,7 @@ function retrievePosition(position) {
     currentPosition.lon = position.coords.longitude;
 
     api.urlCurrent = `https://api.openweathermap.org/data/2.5/weather?lat=${currentPosition.lat}&lon=${currentPosition.lon}&units=metric&appid=${api.apiKey}`;
-    axios.get(api.urlCurrent).then(showCurrentTemp);
+    axios.get(api.urlCurrent).then(showTemp);
 }
 function celsiusToFarenheit(event) {
     event.preventDefault();
