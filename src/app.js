@@ -43,11 +43,19 @@ function searchCity(event) {
     api.city = input.value;
     api.urlSearch = `https://api.openweathermap.org/data/2.5/weather?q=${api.city}&units=metric&appid=${api.apiKey}`
 
-    if (api.urlSearch !== undefined) {
-        axios.get(api.urlSearch).then(showTemp);
-    } else {
-        alert("Please enter a valid city!")
-    }
+    axios.get(api.urlSearch)
+  .then(function (response) {
+    showTemp(response);
+    console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    alert("Enter valid city name!")
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
 }
 function showTemp(response) {
     console.log(response.data);
