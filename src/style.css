@@ -219,7 +219,46 @@ footer {
   font-size: 18px;
   margin-left: 10px;
 }
+/* The alert message box */
+.alert {
+  max-width: 900px;
+  padding: 20px;
+  background-color: #e0c841; /* Red */
+  color: white;
+  margin: 0px auto;
+  display: block;
+  visibility: hidden;
+  animation: Slide_Up_Warning 1.2s ease-in-out;
+  animation-play-state: paused;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* When moving the mouse over the close button */
+.closebtn:hover {
+  color: black;
+}
 @keyframes Slide_Up {
+  0% {
+    transform: translateY(80px);
+    opacity: 0%;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 100%;
+  }
+}
+@keyframes Slide_Up_Warning {
   0% {
     transform: translateY(80px);
     opacity: 0%;

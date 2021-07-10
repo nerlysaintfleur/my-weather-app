@@ -45,17 +45,28 @@ function searchCity(event) {
 
     axios.get(api.urlSearch)
   .then(function (response) {
+    document.querySelector(".alert").style.visibility = "hidden";
+    document.querySelector(".alert").style.animation = " ";
     showTemp(response);
     console.log(response);
   })
   .catch(function (error) {
     // handle error
-    alert("Enter valid city name!")
+    document.querySelector(".alert").style.animationPlayState = "running";
+    document.querySelector(".alert").style.visibility = "visible";
+    //alert("Enter valid city name!")
     console.log(error);
   })
   .then(function () {
     // always executed
+    
   });
+}
+function reset_animation() {
+  var warning = document.querySelector('.alert');
+  warning.style.animation = 'none';
+  warning.offsetHeight; /* trigger reflow */
+  warning.style.animation = null; 
 }
 function showTemp(response) {
     console.log(response.data);
@@ -69,6 +80,7 @@ function showTemp(response) {
     weather.humidity.innerHTML = `Humidity: ${response.data.main.humidity}%`;
     weather.description.innerHTML = `Type: ${response.data.weather[0].description}`;
     weather.minMaxTemp.innerHTML = `Hightest: ${weather.maxTemp}°  Lowest: ${weather.minTemp}°`;
+    reset_animation();
 }
 function retrievePosition(position) {
     currentPosition.lat = position.coords.latitude;
