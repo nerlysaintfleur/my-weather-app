@@ -9,6 +9,8 @@ let weather = {
     minTemp: undefined,
     maxTemp: undefined,
     dateElement: document.querySelector("#date-time-text"),
+    iconElement: document.querySelector("#weather-icon"),
+
 }
 let currentPosition = {
     lat: undefined,
@@ -83,6 +85,8 @@ function showTemp(response) {
     weather.minTemp = Math.round(response.data.main.temp_min);
     weather.maxTemp = Math.round(response.data.main.temp_max);
 
+    weather.iconElement.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+    weather.iconElement.setAttribute("alt",`http://openweathermap.org/img/wn/${response.data.weather[0].description}`);
     weather.dateElement.innerHTML = formatDate(response.data.dt*1000);
     weather.cityName.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
     weather.tempElement.innerHTML = `${weather.tempValue}`;
