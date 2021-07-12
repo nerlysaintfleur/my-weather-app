@@ -2,12 +2,14 @@ let weather = {
     cityName: document.querySelector("#city-name"),
     tempValue: undefined,
     tempElement: document.querySelector("#temp-text"),
-    feelLike: document.querySelector(".forecast01"),
-    humidity: document.querySelector(".forecast02"),
-    description: document.querySelector(".forecast03"),
-    minMaxTemp: document.querySelector(".forecast04"),
-    minTemp: undefined,
-    maxTemp: undefined,
+    feelLike: document.querySelector(".forecast02"),
+    precipitation: document.querySelector(".forecast03"),
+    description: document.querySelector(".forecast01"),
+    windSpeed: document.querySelector(".forecast04"),
+
+    //minMaxTemp: document.querySelector(".forecast04"),
+    //minTemp: undefined,
+    //maxTemp: undefined,
     dateElement: document.querySelector("#date-time-text"),
     iconElement: document.querySelector("#weather-icon"),
 
@@ -82,18 +84,19 @@ function reset_animation() {
 function showTemp(response) {
     console.log(response.data);
     weather.tempValue = Math.round(response.data.main.temp);
-    weather.minTemp = Math.round(response.data.main.temp_min);
-    weather.maxTemp = Math.round(response.data.main.temp_max);
+    //weather.minTemp = Math.round(response.data.main.temp_min);
+    //weather.maxTemp = Math.round(response.data.main.temp_max);
 
     weather.iconElement.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
     weather.iconElement.setAttribute("alt",`http://openweathermap.org/img/wn/${response.data.weather[0].description}`);
     weather.dateElement.innerHTML = formatDate(response.data.dt*1000);
     weather.cityName.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
     weather.tempElement.innerHTML = `${weather.tempValue}`;
+    weather.description.innerHTML = `${response.data.weather[0].description}`;
     weather.feelLike.innerHTML = `Feels Like: ${Math.round(response.data.main.feels_like)}°`;
-    weather.humidity.innerHTML = `Humidity: ${response.data.main.humidity}%`;
-    weather.description.innerHTML = `Type: ${response.data.weather[0].description}`;
-    weather.minMaxTemp.innerHTML = `Hightest: ${weather.maxTemp}°  Lowest: ${weather.minTemp}°`;
+    weather.precipitation.innerHTML = `Precipitation: ${response.data.main.humidity}%`;
+    weather.windSpeed.innerHTML = `Wind Speed: ${Math.round(response.data.wind.speed)} km/h`;
+    //weather.minMaxTemp.innerHTML = `Hightest: ${weather.maxTemp}°  Lowest: ${weather.minTemp}°`;
     reset_animation();
 }
 function retrievePosition(position) {

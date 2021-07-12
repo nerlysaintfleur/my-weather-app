@@ -98,6 +98,9 @@ footer {
   margin-bottom: 5px;
   padding: 5px;
 }
+.forecast04 {
+  text-transform: none;
+}
 .currentCity {
   border: 1px solid rgba(0, 0, 0, 0);
   height: 100%;
