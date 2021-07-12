@@ -8,6 +8,7 @@ let weather = {
     minMaxTemp: document.querySelector(".forecast04"),
     minTemp: undefined,
     maxTemp: undefined,
+    dateElement: document.querySelector("#date-time-text"),
 }
 let currentPosition = {
     lat: undefined,
@@ -21,22 +22,7 @@ let api = {
 
 
 }
-function updateDateTime(current) {
-    let days = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-    ];
 
-    let now = new Date();
-    current = `${days[now.getDay()]} ${now.getHours()}:${(now.getMinutes() < 10 ? '0' : '') + now.getMinutes()}`;
-
-    return current;
-}
 function searchCity(event) {
     event.preventDefault();
     let input = document.querySelector("#search-city");
@@ -74,6 +60,7 @@ function showTemp(response) {
     weather.minTemp = Math.round(response.data.main.temp_min);
     weather.maxTemp = Math.round(response.data.main.temp_max);
 
+    weather.dateElement.innerHTML = formatDate(response.data.dt*1000);
     weather.cityName.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
     weather.tempElement.innerHTML = `${weather.tempValue}`;
     weather.feelLike.innerHTML = `Feels Like: ${Math.round(response.data.main.feels_like)}°`;
@@ -109,12 +96,32 @@ function currentLocation(event) {
     event.preventDefault();
     navigator.geolocation.getCurrentPosition(retrievePosition);
 }
+function formatDate(timestamp){
+    //calculate date
+    let date = new Date(timestamp);
+    let hours = date.getHours();
+    if (hours < 10){
+        hours=`0${minutes}`;
+    }
+    let minutes = date.getMinutes();
+    if (minutes < 10){
+        minutes=`0${minutes}`;
+    }
+    let days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+    ];
+    let day = days[date.getDay()];
+
+    return `${day} ${hours}:${minutes}`;
+}
 
 navigator.geolocation.getCurrentPosition(retrievePosition);
-
-
-let currentDate = document.querySelector("#date-time-text");
-currentDate.innerHTML = updateDateTime();
 
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", searchCity);
