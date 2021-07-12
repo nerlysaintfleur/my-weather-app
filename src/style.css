@@ -125,9 +125,6 @@ footer {
   font-size: 32px;
   letter-spacing: 5px;
 }
-.cityName {
-  margin-top: 40px;
-}
 
 .weekday {
   margin: 60px 0px;
@@ -231,7 +228,9 @@ footer {
   animation: Slide_Up_Warning 1.2s ease-in-out;
   animation-play-state: paused;
 }
-
+.dateTime {
+  font-size: 16px;
+}
 /* The close button */
 .closebtn {
   margin-left: 15px;
