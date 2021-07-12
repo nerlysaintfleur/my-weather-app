@@ -81,16 +81,20 @@ footer {
   text-align: right;
 }
 .forecast {
+  background-color: #8aa8fc4d;
   border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 10px;
   padding: 10px;
 
-  background-color: rgba(255, 255, 255, 0);
+  /*background-color: rgba(255, 255, 255, 0);*/
   color: rgb(104, 104, 104);
   box-shadow: 5px 5px 5px rgba(39, 39, 39, 0.068);
   text-transform: capitalize;
 }
 .forecast div {
-  border: 1px solid rgba(0, 0, 0, 0.123);
+  text-align: center;
+  border: 1px solid rgba(0, 0, 0, 0.048);
+  border-radius: 2px;
   margin-bottom: 5px;
   padding: 5px;
 }
