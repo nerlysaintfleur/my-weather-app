@@ -246,11 +246,10 @@ footer {
   cursor: pointer;
   transition: 0.3s;
 }
-
-/* When moving the mouse over the close button */
 .closebtn:hover {
   color: black;
 }
+
 @keyframes Slide_Up {
   0% {
     transform: translateY(80px);
