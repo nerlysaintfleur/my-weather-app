@@ -9,8 +9,6 @@ let weather = {
 
     maxTemp: [],
     minTemp: [],
-    tempMax:[],
-    tempMin:[],
     dateElement: document.querySelector("#date-time-text"),
     iconElement: document.querySelector("#weather-icon"),
 
@@ -193,10 +191,6 @@ function celsiusToFarenheit(event) {
             let forecastTempMin = document.querySelector(`#min${i}`);
             forecastTempMin.innerHTML = `${Math.round(((weather.minTemp[i]) * 9 / 5) + 32)}°`;
     }
-
-    console.log(weather.maxTemp);
-    console.log(weather.minTemp);
-
     console.log("you converted to farenheit");
 }
 function farenheitToCelsius(event) {
@@ -213,10 +207,6 @@ function farenheitToCelsius(event) {
             let forecastTempMin = document.querySelector(`#min${i}`);
             forecastTempMin.innerHTML = `${Math.round(weather.minTemp[i])}°`;
     }
-
-    console.log(weather.maxTemp);
-    console.log(weather.minTemp);
-
     console.log("you converted to celsius");
 }
 function currentLocation(event) {
