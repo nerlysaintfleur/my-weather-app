@@ -213,9 +213,19 @@ function currentLocation(event) {
     event.preventDefault();
     navigator.geolocation.getCurrentPosition(retrievePosition);
 }
-function refreshWeather(event){
-    event.preventDefault();
-    showForecast();
+function favouriteCity(){
+    //let forecast = response.data.daily;
+    let favoriteElement = document.querySelector("#fav");
+
+        favoriteHTML =
+        favoriteHTML +
+        `
+          <li class="nav-item">
+            <a class="nav-link" href="#">⭐${weather.cityName.innerHTML}</a>
+          </li>
+    `;
+    favoriteHTML = favoriteHTML + `</ul>`;
+    favoriteElement.innerHTML = favoriteHTML;
 }
 onPageLoad();
 navigator.geolocation.getCurrentPosition(retrievePosition);
@@ -232,6 +242,10 @@ farenheitLink.addEventListener("click", celsiusToFarenheit);
 let retrieveCurrentLocation = document.querySelector(".bi-geo-alt");
 retrieveCurrentLocation.addEventListener("click", currentLocation);
 
-//let refreshButton = document.querySelector(".bi-arrow-repeat");
-//refreshButton.addEventListener("click", location.reload);
+let favoriteHTML = `<ul class="nav nav-tabs id" id="fav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#"
+              >📍Current</a
+            >
+            </li>`;
 
