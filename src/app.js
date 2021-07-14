@@ -214,18 +214,34 @@ function currentLocation(event) {
     navigator.geolocation.getCurrentPosition(retrievePosition);
 }
 function favouriteCity(){
-    //let forecast = response.data.daily;
     let favoriteElement = document.querySelector("#fav");
 
         favoriteHTML =
-        favoriteHTML +
-        `
-          <li class="nav-item">
-            <a class="nav-link" href="#">⭐${weather.cityName.innerHTML}</a>
+        favoriteHTML + `
+          <li class="nav-item" id=${tabNum}>
+            <a class="nav-link" href="#">⭐${weather.cityName.innerHTML}
+            <span
+          class="closetab"
+          onclick="this.parentElement.style.display='none'; removeFavourite(this);"
+          >&times;</span>
+            </a>
           </li>
+          </ul>
     `;
-    favoriteHTML = favoriteHTML + `</ul>`;
+    //favoriteHTML = favoriteHTML + `</ul>`;
     favoriteElement.innerHTML = favoriteHTML;
+    tabNum++;
+}
+function removeFavourite(){
+    let favoriteElement = document.querySelector("#fav");
+        
+    favoriteHTML =`<ul class="nav nav-tabs id" id="fav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#"
+              >📍Current</a
+            >
+            </li>`;
+    tabNum--;
 }
 onPageLoad();
 navigator.geolocation.getCurrentPosition(retrievePosition);
@@ -248,4 +264,16 @@ let favoriteHTML = `<ul class="nav nav-tabs id" id="fav">
               >📍Current</a
             >
             </li>`;
+let tabNum=0;
+let favoriteTab = `
+          <li class="nav-item" id=${tabNum}>
+            <a class="nav-link" href="#">⭐${weather.cityName.innerHTML}
+            <span
+          class="closetab"
+          onclick="this.parentElement.style.display='none'; removeFavourite(this);"
+          >&times;</span>
+            </a>
+          </li>
+          </ul>
+    `;
 

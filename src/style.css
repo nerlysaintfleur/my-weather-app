@@ -246,6 +246,19 @@ footer {
 .closebtn:hover {
   color: black;
 }
+.closetab:hover {
+  color: rgba(58, 58, 58, 0.397);
+}
+.closetab {
+  margin-left: 15px;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
 .weather-temperature img {
   margin-right: 5px;
   height: 64px;
