@@ -219,15 +219,16 @@ function favouriteCity(){
         favoriteHTML =
         favoriteHTML + `
           <li class="nav-item" id=${tabNum}>
-            <a class="nav-link" href="#">⭐${weather.cityName.innerHTML}
+            <a class="nav-link " href="#">⭐${weather.cityName.innerHTML}
             <span
           class="closetab"
           onclick="this.parentElement.style.display='none'; removeFavourite(this);"
           >&times;</span>
             </a>
           </li>
-          </ul>
+          
     `;
+    console.log(favoriteHTML);
     //favoriteHTML = favoriteHTML + `</ul>`;
     favoriteElement.innerHTML = favoriteHTML;
     tabNum++;
@@ -235,7 +236,7 @@ function favouriteCity(){
 function removeFavourite(){
     let favoriteElement = document.querySelector("#fav");
         
-    favoriteHTML =`<ul class="nav nav-tabs id" id="fav">
+    favoriteHTML =`<ul class="nav nav-tabs" id="fav">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#"
               >📍Current</a
@@ -258,22 +259,12 @@ farenheitLink.addEventListener("click", celsiusToFarenheit);
 let retrieveCurrentLocation = document.querySelector(".bi-geo-alt");
 retrieveCurrentLocation.addEventListener("click", currentLocation);
 
-let favoriteHTML = `<ul class="nav nav-tabs id" id="fav">
+let favoriteHTML = `<ul class="nav nav-tabs" id="fav">
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="#"
               >📍Current</a
             >
             </li>`;
 let tabNum=0;
-let favoriteTab = `
-          <li class="nav-item" id=${tabNum}>
-            <a class="nav-link" href="#">⭐${weather.cityName.innerHTML}
-            <span
-          class="closetab"
-          onclick="this.parentElement.style.display='none'; removeFavourite(this);"
-          >&times;</span>
-            </a>
-          </li>
-          </ul>
-    `;
+
 
