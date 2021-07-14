@@ -19,7 +19,7 @@ let currentPosition = {
     lon: undefined,
 }
 let api = {
-    city: undefined,
+    city: "Ottawa",
     urlCurrent: undefined,
     urlSearch: undefined,
     apiKey: "11d02a27338da60451df3648cacd8fa4",
@@ -49,6 +49,28 @@ function formatDate(timestamp){
     let day = days[date.getDay()];
 
     return `Last updated: ${day} ${hours}:${minutes}`;
+}
+function onPageLoad() {
+    api.urlSearch = `https://api.openweathermap.org/data/2.5/weather?q=${api.city}&units=metric&appid=${api.apiKey}`
+
+    axios.get(api.urlSearch)
+  .then(function (response) {
+    document.querySelector(".alert").style.visibility = "hidden";
+    document.querySelector(".alert").style.animation = " ";
+    showTemp(response);
+    console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    document.querySelector(".alert").style.animationPlayState = "running";
+    document.querySelector(".alert").style.visibility = "visible";
+    //alert("Enter valid city name!")
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+    
+  });
 }
 function searchCity(event) {
     event.preventDefault();
@@ -97,7 +119,37 @@ function showTemp(response) {
     weather.precipitation.innerHTML = `Precipitation: ${response.data.main.humidity}%`;
     weather.windSpeed.innerHTML = `Wind Speed: ${Math.round(response.data.wind.speed)} km/h`;
     //weather.minMaxTemp.innerHTML = `Hightest: ${weather.maxTemp}°  Lowest: ${weather.minTemp}°`;
+    showForecast();
     reset_animation();
+}
+function showForecast(){
+     let forecastElement = document.querySelector("#forecast");
+
+  let days = ["Thu", "Fri", "Sat", "Sun"];
+
+  let forecastHTML = `<div class="row d-flex justify-content-center">`;
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `
+      <div class="col-2">
+        <div class="weather-forecast-date">${day}</div>
+        <img
+          src="http://openweathermap.org/img/wn/50d@2x.png"
+          alt=""
+          width="60"
+        />
+        <div class="weather-forecast-temperatures">
+          <span class="weather-forecast-temperature-max"> 18° </span>
+          <span class="weather-forecast-temperature-min"> 12° </span>
+        </div>
+      </div>
+  `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+  console.log(forecastHTML);
 }
 function retrievePosition(position) {
     currentPosition.lat = position.coords.latitude;
@@ -127,7 +179,7 @@ function currentLocation(event) {
     navigator.geolocation.getCurrentPosition(retrievePosition);
 }
 
-
+onPageLoad();
 navigator.geolocation.getCurrentPosition(retrievePosition);
 
 let searchForm = document.querySelector("#search-form");
@@ -141,3 +193,5 @@ farenheitLink.addEventListener("click", celsiusToFarenheit);
 
 let retrieveCurrentLocation = document.querySelector(".bi-geo-alt");
 retrieveCurrentLocation.addEventListener("click", currentLocation);
+
+
