@@ -76,7 +76,8 @@ function searchCity(event) {
     event.preventDefault();
     let input = document.querySelector("#search-city");
     api.city = input.value;
-    api.urlSearch = `https://api.openweathermap.org/data/2.5/weather?q=${api.city}&units=metric&appid=${api.apiKey}`
+    api.urlSearch = `https://api.openweathermap.org/data/2.5/weather?q=${api.city}&units=metric&appid=${api.apiKey}`;
+
 
     axios.get(api.urlSearch)
   .then(function (response) {
@@ -96,6 +97,13 @@ function searchCity(event) {
     // always executed
     
   });
+}
+function getForecast(coordinates){
+    console.log(coordinates);
+
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${api.apiKey}&units=metric`;
+    console.log(apiUrl);
+    axios.get(apiUrl).then(showForecast);
 }
 function reset_animation() {
   var warning = document.querySelector('.alert');
@@ -119,11 +127,13 @@ function showTemp(response) {
     weather.precipitation.innerHTML = `Precipitation: ${response.data.main.humidity}%`;
     weather.windSpeed.innerHTML = `Wind Speed: ${Math.round(response.data.wind.speed)} km/h`;
     //weather.minMaxTemp.innerHTML = `Hightest: ${weather.maxTemp}°  Lowest: ${weather.minTemp}°`;
-    showForecast();
+    
+    getForecast(response.data.coord);
     reset_animation();
 }
-function showForecast(){
-     let forecastElement = document.querySelector("#forecast");
+function showForecast(response){
+    console.log(response.data.daily);
+    let forecastElement = document.querySelector("#forecast");
 
   let days = ["Thu", "Fri", "Sat", "Sun"];
 
@@ -149,7 +159,7 @@ function showForecast(){
 
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
-  console.log(forecastHTML);
+  //console.log(forecastHTML);
 }
 function retrievePosition(position) {
     currentPosition.lat = position.coords.latitude;
@@ -162,7 +172,7 @@ function celsiusToFarenheit(event) {
     event.preventDefault();
     weather.tempElement.innerHTML = `${(Math.round(weather.tempValue * 9 / 5) + 32)}`;
     weather.feelLike.innerHTML = `Feels Like: ${Math.round((((weather.tempValue) * 9 / 5) + 32))}°`;
-    weather.minMaxTemp.innerHTML = `Hightest: ${Math.round(((weather.maxTemp) * 9 / 5) + 32)}°  Lowest: ${Math.round(((weather.minTemp) * 9 / 5) + 32)}°`;
+    //weather.minMaxTemp.innerHTML = `Hightest: ${Math.round(((weather.maxTemp) * 9 / 5) + 32)}°  Lowest: ${Math.round(((weather.minTemp) * 9 / 5) + 32)}°`;
 
     console.log("you converted to farenheit");
 }
@@ -170,7 +180,7 @@ function farenheitToCelsius(event) {
     event.preventDefault();
     weather.tempElement.innerHTML = `${weather.tempValue}`;
     weather.feelLike.innerHTML = `Feels Like: ${Math.round(weather.tempValue)}°`;
-    weather.minMaxTemp.innerHTML = `Hightest: ${weather.maxTemp}°  Lowest: ${weather.minTemp}°`;
+    //weather.minMaxTemp.innerHTML = `Hightest: ${weather.maxTemp}°  Lowest: ${weather.minTemp}°`;
 
     console.log("you converted to celsius");
 }
