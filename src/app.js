@@ -213,7 +213,10 @@ function currentLocation(event) {
     event.preventDefault();
     navigator.geolocation.getCurrentPosition(retrievePosition);
 }
-
+function refreshWeather(event){
+    event.preventDefault();
+    showForecast();
+}
 onPageLoad();
 navigator.geolocation.getCurrentPosition(retrievePosition);
 
@@ -229,4 +232,6 @@ farenheitLink.addEventListener("click", celsiusToFarenheit);
 let retrieveCurrentLocation = document.querySelector(".bi-geo-alt");
 retrieveCurrentLocation.addEventListener("click", currentLocation);
 
+//let refreshButton = document.querySelector(".bi-arrow-repeat");
+//refreshButton.addEventListener("click", location.reload);
 
