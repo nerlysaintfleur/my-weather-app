@@ -1,4 +1,5 @@
 let weather = {
+    city:undefined,
     cityName: document.querySelector("#city-name"),
     tempValue: undefined,
     tempElement: document.querySelector("#temp-text"),
@@ -11,6 +12,7 @@ let weather = {
     minTemp: [],
     dateElement: document.querySelector("#date-time-text"),
     iconElement: document.querySelector("#weather-icon"),
+    favCity:[],
 
 }
 let currentPosition = {
@@ -128,6 +130,7 @@ function showTemp(response) {
     weather.iconElement.setAttribute("src",`http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
     weather.iconElement.setAttribute("alt",`http://openweathermap.org/img/wn/${response.data.weather[0].description}`);
     weather.dateElement.innerHTML = formatDate(response.data.dt*1000);
+    weather.city=`${response.data.name}`;
     weather.cityName.innerHTML = `${response.data.name}, ${response.data.sys.country}`;
     weather.tempElement.innerHTML = `${weather.tempValue}`;
     weather.description.innerHTML = `${response.data.weather[0].description}`;
@@ -218,22 +221,24 @@ function favouriteCity(){
 
         favoriteHTML =
         favoriteHTML + `
-          <li class="nav-item" id=${tabNum}>
-            <a class="nav-link " href="#">⭐${weather.cityName.innerHTML}
+          <li class="nav-item" onclick="displayFavouriteCity(this.id);" id=${tabNum}>
+            <a class="nav-link" href="#" >⭐${weather.city}
             <span
           class="closetab"
-          onclick="this.parentElement.style.display='none'; removeFavourite(this);"
+          onclick="this.parentElement.style.display='none'; removeFavourite(this.id);" id=${tabNum}
           >&times;</span>
             </a>
           </li>
           
     `;
+    weather.favCity.push(weather.city);
+    console.log(weather.favCity);
     console.log(favoriteHTML);
     //favoriteHTML = favoriteHTML + `</ul>`;
     favoriteElement.innerHTML = favoriteHTML;
     tabNum++;
 }
-function removeFavourite(){
+function removeFavourite(clicked_id){
     let favoriteElement = document.querySelector("#fav");
         
     favoriteHTML =`<ul class="nav nav-tabs" id="fav">
@@ -242,7 +247,30 @@ function removeFavourite(){
               >📍Current</a
             >
             </li>`;
+    //weather.favCity.splice(clicked_id, 1);
+    console.log(weather.favCity);
     tabNum--;
+}
+function displayFavouriteCity(clicked_id){
+  api.urlSearch = `https://api.openweathermap.org/data/2.5/weather?q=${weather.favCity[clicked_id]}&units=metric&appid=${api.apiKey}`;
+   axios.get(api.urlSearch)
+  .then(function (response) {
+    document.querySelector(".alert").style.visibility = "hidden";
+    document.querySelector(".alert").style.animation = " ";
+    showTemp(response);
+  })
+  .catch(function (error) {
+    // handle error
+    document.querySelector(".alert").style.animationPlayState = "running";
+    document.querySelector(".alert").style.visibility = "visible";
+    //alert("Enter valid city name!")
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+    
+  });
+
 }
 onPageLoad();
 navigator.geolocation.getCurrentPosition(retrievePosition);
